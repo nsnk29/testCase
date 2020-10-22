@@ -12,7 +12,7 @@
 
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="ic_image_placeholder">@color/gray</color>
-    <color name="image_info_background">@color/dark_gray</color>
+    <color name="image_info_background">#4DFFFFFF</color>
     <color name="ic_image_info">@color/gray</color>
     <color name="text_thumbs">@color/gray</color>
 </resources>
