@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/imgurListFragment2">
+    <fragment
+        android:id="@+id/imgurListFragment2"
+        android:name="com.nsnk.testcase.data.ImgurListFragment"
+        android:label="fragment_ingur_list"
+        tools:layout="@layout/fragment_imgur_list" />
+</navigation>
