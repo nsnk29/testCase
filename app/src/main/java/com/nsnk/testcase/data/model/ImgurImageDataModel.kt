@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-// TODO: 23.10.2020 удалить лишние поля
 @Parcelize
 data class ImgurImageDataModel(
     @SerializedName("account_id")
@@ -12,81 +11,58 @@ data class ImgurImageDataModel(
     @SerializedName("account_url")
     val accountUrl: String,
     @SerializedName("comment_count")
-    val commentCount: String,
-    val cover: String,
+    val commentCount: Int,
+    val cover: String?,
     @SerializedName("cover_height")
-    val coverHeight: Int,
+    val coverHeight: Int?,
     @SerializedName("cover_width")
-    val coverWidth: Int,
-    val width: Int,
-    val height: Int,
+    val coverWidth: Int?,
+    val width: Int?,
+    val height: Int?,
     val datetime: Int,
-    val downs: String,
-    val favorite: Boolean,
-    @SerializedName("favorite_count")
-    val favoriteCount: Int,
+    val downs: Int,
     val id: String,
-    val images: List<Image>,
+    val images: List<Image>?,
     @SerializedName("images_count")
-    val imagesCount: Int,
-    @SerializedName("in_gallery")
-    val inGallery: Boolean,
-    @SerializedName("in_most_viral")
-    val inMostViral: Boolean,
-    @SerializedName("include_album_ads")
-    val includeAlbumAds: Boolean,
-    @SerializedName("is_ad")
-    val isAd: Boolean,
+    val imagesCount: Int?,
     @SerializedName("is_album")
     val isAlbum: Boolean,
-    val layout: String,
     val link: String,
     val points: Int,
-    val privacy: String,
     val score: Int,
-    val section: String,
-    val title: String,
-    val topic: String,
-    @SerializedName("topic_id")
-    val topicId: Int,
-    val ups: String,
-    val views: String
+    val section: String?,
+    val title: String?,
+    val topic: String?,
+    val ups: Int,
+    val views: Int,
+    val type: String?
 ) : Parcelable {
 
     fun getImageLink(): String? =
-        if (isAlbum && images.isNotEmpty()) {
+        if (isAlbum && !images.isNullOrEmpty()) {
             "https://i.imgur.com/${cover}.jpg"
-        } else link
+        } else "https://i.imgur.com/${id}.jpg"
 
+    fun getImageThumbnail(): String =
+        if (isAlbum && !images.isNullOrEmpty()) {
+            "https://i.imgur.com/${cover}$THUMBNAIL_SUFFIX.jpg"
+        } else
+            "https://i.imgur.com/${id}$THUMBNAIL_SUFFIX.jpg"
+
+
+    fun isJpegImage(): Boolean = (isAlbum && images?.first()?.type == JPEG) || (type == JPEG)
+    fun getImageWidth(): Int = if (isAlbum) coverWidth!! else width!!
+    fun getImageHeight(): Int = if (isAlbum) coverHeight!! else height!!
+
+
+    // остальные поля не нужны
     @Parcelize
     data class Image(
-        val animated: Boolean,
-        val bandwidth: Long,
-        @SerializedName("comment_count")
-        val commentCount: String,
-        val datetime: Int,
-        val description: String,
-        val downs: String,
-        val edited: String,
-        val favorite: Boolean,
-        @SerializedName("favorite_count")
-        val favoriteCount: String,
-        @SerializedName("has_sound")
-        val hasSound: Boolean,
-        val height: Int,
-        val id: String,
-        @SerializedName("is_ad")
-        val isAd: Boolean,
-        val link: String,
-        val size: Int,
-        val tags: List<String>,
-        val title: String,
-        val type: String,
-        val mp4: String,
-        val gifv: String,
-        val ups: String,
-        val views: Int,
-        val width: Int
+        val type: String
     ) : Parcelable
 
+    companion object {
+        const val JPEG = "image/jpeg"
+        const val THUMBNAIL_SUFFIX = "l"
+    }
 }

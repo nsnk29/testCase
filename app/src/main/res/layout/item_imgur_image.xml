@@ -4,39 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.nsnk.testcase.data.model.ImgurImageDataModel" />
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_dimen"
         app:cardCornerRadius="@dimen/small_dimen"
         app:cardElevation="@dimen/small_dimen">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/itemlayout"
+        <LinearLayout
+            android:id="@+id/item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/small_dimen"
             tools:ignore="UseCompoundDrawables">
 
-            <!--    CompoundDrawables в данном случае не подходит -->
-
             <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/img_description"
-                app:imageUrl="@{model.getImageLink()}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/title_text_view"/>
+                app:imageUrl="@{model.getImageThumbnail()}"
+                tools:src="@drawable/ic_person" />
 
             <TextView
                 android:id="@+id/title_text_view"
@@ -47,13 +45,7 @@
                 android:text="@{model.title}"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="All I need is a dog and John Wick...!" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

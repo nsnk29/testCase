@@ -1,19 +1,20 @@
-package com.nsnk.testcase.data
+package com.nsnk.testcase.data.viewmodel
 
 import android.annotation.SuppressLint
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nsnk.testcase.data.LiveDataResult
 import com.nsnk.testcase.data.di.DaggerImgurViewModelInjector
 import com.nsnk.testcase.data.di.NetworkModule
-import com.nsnk.testcase.data.model.BaseResponseImgur
+import com.nsnk.testcase.data.model.GalleryResponseImgur
+import com.nsnk.testcase.data.observer.ImgurImageMaybeObserver
 import com.nsnk.testcase.data.retrofit.ImgurApi
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class ImgurViewModel : ViewModel() {
+class ImgurGalleryViewModel : ViewModel() {
 
     init {
         inject()
@@ -29,7 +30,8 @@ class ImgurViewModel : ViewModel() {
     @Inject
     lateinit var imgurApi: ImgurApi
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    val apiLiveData: MutableLiveData<LiveDataResult<BaseResponseImgur>> = MutableLiveData()
+    val galleryApiLiveData: MutableLiveData<LiveDataResult<GalleryResponseImgur>> =
+        MutableLiveData()
 
     private var subscription: Disposable? = null
 
@@ -41,7 +43,7 @@ class ImgurViewModel : ViewModel() {
         page: Int = DEFAULT_PAGE,
     ) {
         val apiBaseResponse = imgurApi.getGallery(section, sort, window, page)
-        val maybeObserver = ImgurMaybeObserver(loadingVisibility, apiLiveData, page)
+        val maybeObserver = ImgurImageMaybeObserver(loadingVisibility, galleryApiLiveData, page)
         apiBaseResponse.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(maybeObserver)

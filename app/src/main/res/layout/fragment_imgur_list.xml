@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.nsnk.testcase.data.ImgurListFragment">
+    tools:context="com.nsnk.testcase.data.fragment.ImgurListFragment">
 
     <data>
 
         <variable
-            name="viewModel"
-            type="com.nsnk.testcase.data.ImgurViewModel" />
+            name="mViewModel"
+            type="com.nsnk.testcase.data.viewmodel.ImgurGalleryViewModel" />
 
         <variable
-            name="recyclerAdapter"
-            type="com.nsnk.testcase.data.ImgurRecyclerAdapter" />
+            name="mRecyclerAdapter"
+            type="com.nsnk.testcase.data.adapter.ImgurGalleryAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,18 +22,18 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:mutableVisibility="@{viewModel.getLoadingVisibility()}" />
+            app:mutableVisibility="@{mViewModel.getLoadingVisibility()}" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/postsRecyclerView"
+            android:id="@+id/posts_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:adapter="@{recyclerAdapter}"
+            app:adapter="@{mRecyclerAdapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -3,10 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/imgurListFragment2">
+    app:startDestination="@id/imgurListFragment">
     <fragment
-        android:id="@+id/imgurListFragment2"
-        android:name="com.nsnk.testcase.data.ImgurListFragment"
-        android:label="fragment_ingur_list"
-        tools:layout="@layout/fragment_imgur_list" />
+        android:id="@+id/imgurListFragment"
+        android:name="com.nsnk.testcase.data.fragment.ImgurListFragment"
+        android:label="Gallery"
+        tools:layout="@layout/fragment_imgur_list">
+        <action
+            android:id="@+id/action_imgurListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.nsnk.testcase.data.fragment.DetailsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_imgur_image_details">
+        <argument
+            android:name="model"
+            app:argType="com.nsnk.testcase.data.model.ImgurImageDataModel" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

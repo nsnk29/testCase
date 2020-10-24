@@ -6,9 +6,10 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import androidx.lifecycle.Observer
+import com.nsnk.testcase.R
 
 fun View.getParentActivity(): AppCompatActivity? {
     var context = this.context
@@ -39,12 +40,10 @@ fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
 }
 
 @BindingAdapter("imageUrl")
-fun loadImageUrl(view: ImageView, imageUrl: String?) {
-    if (imageUrl != null) {
-        // TODO: 23.10.2020 thumb
-        Glide.with(view)
-            .load(imageUrl)
-            .centerInside()
-            .into(view)
-    }
+fun loadImageUrl(view: ImageView, imageUrl: String) {
+    Glide.with(view)
+        .load(imageUrl)
+        .placeholder(R.drawable.ic_image_placeholder)
+        .error(R.drawable.ic_image_error)
+        .into(view)
 }

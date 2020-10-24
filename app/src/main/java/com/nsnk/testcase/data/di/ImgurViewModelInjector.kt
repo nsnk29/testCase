@@ -1,6 +1,7 @@
 package com.nsnk.testcase.data.di
 
-import com.nsnk.testcase.data.ImgurViewModel
+import com.nsnk.testcase.data.viewmodel.ImgurCommentViewModel
+import com.nsnk.testcase.data.viewmodel.ImgurGalleryViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,7 +9,8 @@ import javax.inject.Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ImgurViewModelInjector {
 
-    fun inject(viewModel: ImgurViewModel)
+    fun inject(galleryViewModel: ImgurGalleryViewModel)
+    fun inject(commentViewModel: ImgurCommentViewModel)
 
     @Component.Builder
     interface Builder {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.nsnk.testcase.data.model.ImgurCommentDataModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/avatar_image_view"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_margin="@dimen/default_dimen"
+            android:contentDescription="@string/img_description"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_dimen"
+            android:layout_marginEnd="@dimen/default_dimen"
+            android:text="@{model.author}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatar_image_view"
+            app:layout_constraintTop_toTopOf="@id/avatar_image_view"
+            tools:text="dizzle148" />
+
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_dimen"
+            android:text="@{model.comment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatar_image_view"
+            app:layout_constraintTop_toBottomOf="@id/author"
+            tools:text="Hell yeah looks great! We are also building a shed at my house, it has been daunting so this gives me hope! :)" />
+
+        <TextView
+            android:id="@+id/thumb_up_text_view"
+            style="@style/ImageInfoTextStyle"
+            android:text="@{Integer.toString(model.ups)}"
+            app:drawableLeftCompat="@drawable/ic_thumb_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/comment_text"
+            app:layout_constraintTop_toBottomOf="@id/comment_text"
+            tools:text="120" />
+
+        <TextView
+            android:id="@+id/thumb_down_text_view"
+            style="@style/ImageInfoTextStyle"
+            android:layout_marginStart="@dimen/large_dimen"
+            android:text="@{Integer.toString(model.downs)}"
+            app:drawableLeftCompat="@drawable/ic_thumb_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumb_up_text_view"
+            app:layout_constraintTop_toBottomOf="@id/comment_text"
+            tools:text="2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
